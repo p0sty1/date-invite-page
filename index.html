@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Date Invite</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="phone" aria-live="polite">
+        <div class="heart-field" id="heartField" aria-hidden="true"></div>
+        <div class="sparkle-grid" aria-hidden="true"></div>
+
+        <div class="screen active" data-screen="ask">
+          <div class="sticker-zone">
+            <img class="sticker jelly hidden" id="jellySticker" src="assets/jelly-sticker.svg" alt="">
+          </div>
+          <div class="card ask-card">
+            <p class="eyebrow">just one tiny question</p>
+            <h1>Will you go on a date with me?</h1>
+            <p class="subtitle" id="askSubtitle">I made buttons, so this is legally serious.</p>
+            <div class="choice-stage" id="choiceStage">
+              <button class="btn primary" id="yesButton" type="button">Yes</button>
+              <button class="btn ghost no-button" id="noButton" type="button">No</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen" data-screen="surprise">
+          <div class="sticker-zone tall">
+            <img class="sticker celebration" src="assets/cloud-sticker.svg" alt="">
+          </div>
+          <div class="card">
+            <p class="eyebrow">wait. hold on.</p>
+            <h2>You actually said yes?</h2>
+            <p class="subtitle">I was so ready for you to say no.</p>
+            <button class="btn primary wide" id="nextToDate" type="button">Next</button>
+          </div>
+        </div>
+
+        <div class="screen" data-screen="date">
+          <div class="card">
+            <p class="eyebrow">calendar negotiations</p>
+            <h2>When are you free?</h2>
+            <label class="field">
+              <span>Pick a date</span>
+              <input id="dateInput" type="date">
+            </label>
+            <label class="field">
+              <span>Pick a time</span>
+              <input id="timeInput" type="time">
+            </label>
+            <button class="btn primary wide" id="selectDate" type="button" disabled>Select the date</button>
+          </div>
+        </div>
+
+        <div class="screen" data-screen="food">
+          <div class="card food-card">
+            <p class="eyebrow">important business</p>
+            <h2>What are we feelin'?</h2>
+            <div class="food-grid" id="foodGrid">
+              <button class="food-option" type="button" data-food="Burgers" data-vibe="burger diplomacy">
+                <span class="food-emoji">🍔</span>
+                <span>Burgers</span>
+              </button>
+              <button class="food-option" type="button" data-food="Sushi" data-vibe="tiny rice masterpieces">
+                <span class="food-emoji">🍣</span>
+                <span>Sushi</span>
+              </button>
+              <button class="food-option" type="button" data-food="Tacos" data-vibe="crunchy excellence">
+                <span class="food-emoji">🌮</span>
+                <span>Tacos</span>
+              </button>
+              <button class="food-option" type="button" data-food="Pizza" data-vibe="triangle happiness">
+                <span class="food-emoji">🍕</span>
+                <span>Pizza</span>
+              </button>
+              <button class="food-option" type="button" data-food="Pasta" data-vibe="romantic noodle science">
+                <span class="food-emoji">🍝</span>
+                <span>Pasta</span>
+              </button>
+              <button class="food-option" type="button" data-food="Dessert" data-vibe="sugar with a plan">
+                <span class="food-emoji">🍰</span>
+                <span>Dessert</span>
+              </button>
+            </div>
+            <button class="btn primary wide" id="pickFood" type="button" disabled>Pick one</button>
+          </div>
+        </div>
+
+        <div class="screen" data-screen="final">
+          <div class="sticker-zone tall">
+            <img class="sticker celebration floaty" src="assets/cloud-sticker.svg" alt="">
+          </div>
+          <div class="card final-card">
+            <p class="eyebrow">date secured</p>
+            <h2>I got you.</h2>
+            <p class="subtitle">Be ready for it. I'm coming to get you.</p>
+            <dl class="summary">
+              <div>
+                <dt>Date</dt>
+                <dd id="summaryDate">—</dd>
+              </div>
+              <div>
+                <dt>Time</dt>
+                <dd id="summaryTime">—</dd>
+              </div>
+              <div>
+                <dt>Food</dt>
+                <dd id="summaryFood">—</dd>
+              </div>
+            </dl>
+            <div class="final-actions">
+              <button class="icon-btn" id="restartButton" type="button" aria-label="Start over">
+                <span aria-hidden="true">↺</span>
+              </button>
+              <button class="btn primary" id="copyButton" type="button">Copy plan</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
