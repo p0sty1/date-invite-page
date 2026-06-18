@@ -10,11 +10,18 @@ const timeInput = document.getElementById("timeInput");
 const selectDate = document.getElementById("selectDate");
 const foodGrid = document.getElementById("foodGrid");
 const pickFood = document.getElementById("pickFood");
+const activityGrid = document.getElementById("activityGrid");
+const pickActivity = document.getElementById("pickActivity");
 const summaryDate = document.getElementById("summaryDate");
 const summaryTime = document.getElementById("summaryTime");
 const summaryFood = document.getElementById("summaryFood");
+const summaryActivity = document.getElementById("summaryActivity");
 const restartButton = document.getElementById("restartButton");
 const copyButton = document.getElementById("copyButton");
+const calendarButton = document.getElementById("calendarButton");
+const calendarPrompt = document.getElementById("calendarPrompt");
+const skipCalendar = document.getElementById("skipCalendar");
+const addCalendarPrompt = document.getElementById("addCalendarPrompt");
 
 const state = {
   noCount: 0,
@@ -22,6 +29,8 @@ const state = {
   time: "",
   food: "",
   vibe: "",
+  activity: "",
+  activityVibe: "",
 };
 
 const noLines = [
@@ -103,7 +112,7 @@ function updateDateButton() {
 }
 
 function formatDate(dateString) {
-  if (!dateString) return "—";
+  if (!dateString) return "-";
   const date = new Date(`${dateString}T12:00:00`);
   return new Intl.DateTimeFormat("en", {
     weekday: "short",
@@ -114,7 +123,7 @@ function formatDate(dateString) {
 }
 
 function formatTime(timeString) {
-  if (!timeString) return "—";
+  if (!timeString) return "-";
   const [hours, minutes] = timeString.split(":").map(Number);
   const date = new Date();
   date.setHours(hours, minutes, 0, 0);
@@ -127,25 +136,109 @@ function formatTime(timeString) {
 function updateFinal() {
   summaryDate.textContent = formatDate(state.date);
   summaryTime.textContent = formatTime(state.time);
-  summaryFood.textContent = state.food ? `${state.food} (${state.vibe})` : "—";
+  summaryFood.textContent = state.food ? `${state.food} (${state.vibe})` : "-";
+  summaryActivity.textContent = state.activity
+    ? `${state.activity} (${state.activityVibe})`
+    : "-";
+}
+
+function buildPlanText() {
+  return [
+    "Date plan confirmed",
+    `Date: ${formatDate(state.date)}`,
+    `Time: ${formatTime(state.time)}`,
+    `Food: ${state.food}`,
+    `Activity: ${state.activity}`,
+  ].join("\n");
 }
 
 function resetInvite() {
   state.noCount = 0;
   state.food = "";
   state.vibe = "";
+  state.activity = "";
+  state.activityVibe = "";
   askSubtitle.textContent = "I made buttons, so this is legally serious.";
   jellySticker.classList.add("hidden");
   noButton.className = "btn ghost no-button";
   noButton.removeAttribute("style");
   noButton.textContent = "No";
-  document.querySelectorAll(".food-option").forEach((option) => {
+  document.querySelectorAll(".option-card").forEach((option) => {
     option.classList.remove("selected");
   });
   pickFood.disabled = true;
   pickFood.textContent = "Pick one";
+  pickActivity.disabled = true;
+  pickActivity.textContent = "Pick one";
+  calendarPrompt.classList.add("hidden");
   setDefaultDateTime();
   showScreen("ask");
+}
+
+function pad(value) {
+  return String(value).padStart(2, "0");
+}
+
+function toIcsDate(date) {
+  return [
+    date.getUTCFullYear(),
+    pad(date.getUTCMonth() + 1),
+    pad(date.getUTCDate()),
+    "T",
+    pad(date.getUTCHours()),
+    pad(date.getUTCMinutes()),
+    pad(date.getUTCSeconds()),
+    "Z",
+  ].join("");
+}
+
+function escapeIcs(value) {
+  return String(value)
+    .replaceAll("\\", "\\\\")
+    .replaceAll(";", "\\;")
+    .replaceAll(",", "\\,")
+    .replaceAll("\n", "\\n");
+}
+
+function downloadCalendarEvent() {
+  if (!state.date || !state.time) return;
+  const start = new Date(`${state.date}T${state.time}:00`);
+  const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+  const description = [
+    "She said yes.",
+    `Food: ${state.food || "TBD"}`,
+    `Activity: ${state.activity || "TBD"}`,
+  ].join("\n");
+  const ics = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Date Invite//Date Plan//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    `UID:${Date.now()}@date-invite`,
+    `DTSTAMP:${toIcsDate(new Date())}`,
+    `DTSTART:${toIcsDate(start)}`,
+    `DTEND:${toIcsDate(end)}`,
+    "SUMMARY:Date plan",
+    `DESCRIPTION:${escapeIcs(description)}`,
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ].join("\r\n");
+  const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "date-plan.ics";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  calendarButton.textContent = "Calendar ready";
+  calendarPrompt.classList.add("hidden");
+  setTimeout(() => {
+    calendarButton.textContent = "Add calendar";
+  }, 1400);
 }
 
 yesButton.addEventListener("click", () => showScreen("surprise"));
@@ -172,16 +265,38 @@ foodGrid.addEventListener("click", (event) => {
 
 pickFood.addEventListener("click", () => {
   if (!state.food) return;
+  showScreen("activity");
+});
+
+activityGrid.addEventListener("click", (event) => {
+  const option = event.target.closest(".activity-option");
+  if (!option) return;
+  document.querySelectorAll(".activity-option").forEach((item) => {
+    item.classList.toggle("selected", item === option);
+  });
+  state.activity = option.dataset.activity;
+  state.activityVibe = option.dataset.vibe;
+  pickActivity.disabled = false;
+  pickActivity.textContent = "solid plan";
+});
+
+pickActivity.addEventListener("click", () => {
+  if (!state.activity) return;
   updateFinal();
   showScreen("final");
+  window.setTimeout(() => {
+    calendarPrompt.classList.remove("hidden");
+  }, 650);
 });
 
 restartButton.addEventListener("click", resetInvite);
+calendarButton.addEventListener("click", downloadCalendarEvent);
+skipCalendar.addEventListener("click", () => calendarPrompt.classList.add("hidden"));
+addCalendarPrompt.addEventListener("click", downloadCalendarEvent);
 
 copyButton.addEventListener("click", async () => {
-  const plan = `Date plan confirmed\nDate: ${formatDate(state.date)}\nTime: ${formatTime(state.time)}\nFood: ${state.food}`;
   try {
-    await navigator.clipboard.writeText(plan);
+    await navigator.clipboard.writeText(buildPlanText());
     copyButton.textContent = "Copied";
     setTimeout(() => {
       copyButton.textContent = "Copy plan";

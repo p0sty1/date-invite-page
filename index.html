@@ -59,33 +59,67 @@
           <div class="card food-card">
             <p class="eyebrow">important business</p>
             <h2>What are we feelin'?</h2>
-            <div class="food-grid" id="foodGrid">
-              <button class="food-option" type="button" data-food="Burgers" data-vibe="burger diplomacy">
-                <span class="food-emoji">🍔</span>
+            <div class="option-grid food-grid" id="foodGrid">
+              <button class="option-card food-option" type="button" data-food="Burgers" data-vibe="burger diplomacy">
+                <span class="option-emoji food-emoji">&#127828;</span>
                 <span>Burgers</span>
               </button>
-              <button class="food-option" type="button" data-food="Sushi" data-vibe="tiny rice masterpieces">
-                <span class="food-emoji">🍣</span>
+              <button class="option-card food-option" type="button" data-food="Sushi" data-vibe="tiny rice masterpieces">
+                <span class="option-emoji food-emoji">&#127843;</span>
                 <span>Sushi</span>
               </button>
-              <button class="food-option" type="button" data-food="Tacos" data-vibe="crunchy excellence">
-                <span class="food-emoji">🌮</span>
+              <button class="option-card food-option" type="button" data-food="Tacos" data-vibe="crunchy excellence">
+                <span class="option-emoji food-emoji">&#127790;</span>
                 <span>Tacos</span>
               </button>
-              <button class="food-option" type="button" data-food="Pizza" data-vibe="triangle happiness">
-                <span class="food-emoji">🍕</span>
+              <button class="option-card food-option" type="button" data-food="Pizza" data-vibe="triangle happiness">
+                <span class="option-emoji food-emoji">&#127829;</span>
                 <span>Pizza</span>
               </button>
-              <button class="food-option" type="button" data-food="Pasta" data-vibe="romantic noodle science">
-                <span class="food-emoji">🍝</span>
+              <button class="option-card food-option" type="button" data-food="Pasta" data-vibe="romantic noodle science">
+                <span class="option-emoji food-emoji">&#127837;</span>
                 <span>Pasta</span>
               </button>
-              <button class="food-option" type="button" data-food="Dessert" data-vibe="sugar with a plan">
-                <span class="food-emoji">🍰</span>
+              <button class="option-card food-option" type="button" data-food="Dessert" data-vibe="sugar with a plan">
+                <span class="option-emoji food-emoji">&#127856;</span>
                 <span>Dessert</span>
               </button>
             </div>
             <button class="btn primary wide" id="pickFood" type="button" disabled>Pick one</button>
+          </div>
+        </div>
+
+        <div class="screen" data-screen="activity">
+          <div class="card activity-card">
+            <p class="eyebrow">after dinner chaos</p>
+            <h2>What are we doing?</h2>
+            <div class="option-grid activity-grid" id="activityGrid">
+              <button class="option-card activity-option" type="button" data-activity="Movie night" data-vibe="popcorn strategy">
+                <span class="option-emoji activity-emoji">&#127916;</span>
+                <span>Movie</span>
+              </button>
+              <button class="option-card activity-option" type="button" data-activity="Arcade games" data-vibe="competitive nonsense">
+                <span class="option-emoji activity-emoji">&#127918;</span>
+                <span>Arcade</span>
+              </button>
+              <button class="option-card activity-option" type="button" data-activity="Bowling" data-vibe="very serious shoes">
+                <span class="option-emoji activity-emoji">&#127923;</span>
+                <span>Bowling</span>
+              </button>
+              <button class="option-card activity-option" type="button" data-activity="Karaoke" data-vibe="main character vocals">
+                <span class="option-emoji activity-emoji">&#127908;</span>
+                <span>Karaoke</span>
+              </button>
+              <button class="option-card activity-option" type="button" data-activity="Night walk" data-vibe="cute wandering">
+                <span class="option-emoji activity-emoji">&#127769;</span>
+                <span>Walk</span>
+              </button>
+              <button class="option-card activity-option" type="button" data-activity="Photo booth" data-vibe="evidence collection">
+                <span class="option-emoji activity-emoji">&#128248;</span>
+                <span>Photos</span>
+              </button>
+            </div>
+            <button class="btn primary wide" id="pickActivity" type="button" disabled>Pick one</button>
           </div>
         </div>
 
@@ -100,22 +134,38 @@
             <dl class="summary">
               <div>
                 <dt>Date</dt>
-                <dd id="summaryDate">—</dd>
+                <dd id="summaryDate">&mdash;</dd>
               </div>
               <div>
                 <dt>Time</dt>
-                <dd id="summaryTime">—</dd>
+                <dd id="summaryTime">&mdash;</dd>
               </div>
               <div>
                 <dt>Food</dt>
-                <dd id="summaryFood">—</dd>
+                <dd id="summaryFood">&mdash;</dd>
+              </div>
+              <div>
+                <dt>Activity</dt>
+                <dd id="summaryActivity">&mdash;</dd>
               </div>
             </dl>
             <div class="final-actions">
               <button class="icon-btn" id="restartButton" type="button" aria-label="Start over">
-                <span aria-hidden="true">↺</span>
+                <span aria-hidden="true">&#8634;</span>
               </button>
+              <button class="btn secondary" id="calendarButton" type="button">Add calendar</button>
               <button class="btn primary" id="copyButton" type="button">Copy plan</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-prompt hidden" id="calendarPrompt" role="dialog" aria-modal="true" aria-labelledby="calendarPromptTitle">
+          <div class="calendar-box">
+            <p class="eyebrow">official paperwork</p>
+            <h3 id="calendarPromptTitle">Set this in your calendar?</h3>
+            <div class="calendar-actions">
+              <button class="btn ghost compact" id="skipCalendar" type="button">Later</button>
+              <button class="btn primary compact" id="addCalendarPrompt" type="button">Set it</button>
             </div>
           </div>
         </div>
