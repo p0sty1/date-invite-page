@@ -1,14 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Date Invite</title>
+    <title>约会邀请</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <main class="shell">
       <section class="phone" aria-live="polite">
+        <div class="language-switch" aria-label="Language">
+          <button class="lang-btn active" type="button" data-lang="zh">中</button>
+          <button class="lang-btn" type="button" data-lang="en">EN</button>
+        </div>
         <div class="heart-field" id="heartField" aria-hidden="true"></div>
         <div class="sparkle-grid" aria-hidden="true"></div>
 
@@ -17,12 +21,12 @@
             <img class="sticker jelly hidden" id="jellySticker" src="assets/jelly-sticker.svg" alt="">
           </div>
           <div class="card ask-card">
-            <p class="eyebrow">just one tiny question</p>
-            <h1>Will you go on a date with me?</h1>
-            <p class="subtitle" id="askSubtitle">I made buttons, so this is legally serious.</p>
+            <p class="eyebrow" data-i18n="ask.eyebrow">先问一个小问题</p>
+            <h1 data-i18n="ask.title">要不要和我约会？</h1>
+            <p class="subtitle" id="askSubtitle" data-i18n="ask.subtitle">按钮都写好了，这事已经很正式了。</p>
             <div class="choice-stage" id="choiceStage">
-              <button class="btn primary" id="yesButton" type="button">Yes</button>
-              <button class="btn ghost no-button" id="noButton" type="button">No</button>
+              <button class="btn primary" id="yesButton" type="button" data-i18n="ask.yes">好呀</button>
+              <button class="btn ghost no-button" id="noButton" type="button" data-i18n="ask.no">不要</button>
             </div>
           </div>
         </div>
@@ -32,94 +36,94 @@
             <img class="sticker celebration" src="assets/cloud-sticker.svg" alt="">
           </div>
           <div class="card">
-            <p class="eyebrow">wait. hold on.</p>
-            <h2>You actually said yes?</h2>
-            <p class="subtitle">I was so ready for you to say no.</p>
-            <button class="btn primary wide" id="nextToDate" type="button">Next</button>
+            <p class="eyebrow" data-i18n="surprise.eyebrow">等下，真的假的</p>
+            <h2 data-i18n="surprise.title">你真的答应了？</h2>
+            <p class="subtitle" data-i18n="surprise.subtitle">我都准备好被拒绝了。</p>
+            <button class="btn primary wide" id="nextToDate" type="button" data-i18n="common.next">下一步</button>
           </div>
         </div>
 
         <div class="screen" data-screen="date">
           <div class="card">
-            <p class="eyebrow">calendar negotiations</p>
-            <h2>When are you free?</h2>
+            <p class="eyebrow" data-i18n="date.eyebrow">日程谈判时间</p>
+            <h2 data-i18n="date.title">你什么时候有空？</h2>
             <label class="field">
-              <span>Pick a date</span>
+              <span data-i18n="date.pickDate">选个日期</span>
               <input id="dateInput" type="date">
             </label>
             <label class="field">
-              <span>Pick a time</span>
+              <span data-i18n="date.pickTime">选个时间</span>
               <input id="timeInput" type="time">
             </label>
-            <button class="btn primary wide" id="selectDate" type="button" disabled>Select the date</button>
+            <button class="btn primary wide" id="selectDate" type="button" disabled data-i18n="date.select">确定时间</button>
           </div>
         </div>
 
         <div class="screen" data-screen="food">
           <div class="card food-card">
-            <p class="eyebrow">important business</p>
-            <h2>What are we feelin'?</h2>
+            <p class="eyebrow" data-i18n="food.eyebrow">重要决定</p>
+            <h2 data-i18n="food.title">想吃点什么？</h2>
             <div class="option-grid food-grid" id="foodGrid">
-              <button class="option-card food-option" type="button" data-food="Burgers" data-vibe="burger diplomacy">
+              <button class="option-card food-option" type="button" data-food-key="burgers">
                 <span class="option-emoji food-emoji">&#127828;</span>
-                <span>Burgers</span>
+                <span data-i18n="foods.burgers.label">汉堡</span>
               </button>
-              <button class="option-card food-option" type="button" data-food="Sushi" data-vibe="tiny rice masterpieces">
+              <button class="option-card food-option" type="button" data-food-key="sushi">
                 <span class="option-emoji food-emoji">&#127843;</span>
-                <span>Sushi</span>
+                <span data-i18n="foods.sushi.label">寿司</span>
               </button>
-              <button class="option-card food-option" type="button" data-food="Tacos" data-vibe="crunchy excellence">
+              <button class="option-card food-option" type="button" data-food-key="tacos">
                 <span class="option-emoji food-emoji">&#127790;</span>
-                <span>Tacos</span>
+                <span data-i18n="foods.tacos.label">塔可</span>
               </button>
-              <button class="option-card food-option" type="button" data-food="Pizza" data-vibe="triangle happiness">
+              <button class="option-card food-option" type="button" data-food-key="pizza">
                 <span class="option-emoji food-emoji">&#127829;</span>
-                <span>Pizza</span>
+                <span data-i18n="foods.pizza.label">披萨</span>
               </button>
-              <button class="option-card food-option" type="button" data-food="Pasta" data-vibe="romantic noodle science">
+              <button class="option-card food-option" type="button" data-food-key="pasta">
                 <span class="option-emoji food-emoji">&#127837;</span>
-                <span>Pasta</span>
+                <span data-i18n="foods.pasta.label">意面</span>
               </button>
-              <button class="option-card food-option" type="button" data-food="Dessert" data-vibe="sugar with a plan">
+              <button class="option-card food-option" type="button" data-food-key="dessert">
                 <span class="option-emoji food-emoji">&#127856;</span>
-                <span>Dessert</span>
+                <span data-i18n="foods.dessert.label">甜点</span>
               </button>
             </div>
-            <button class="btn primary wide" id="pickFood" type="button" disabled>Pick one</button>
+            <button class="btn primary wide" id="pickFood" type="button" disabled data-i18n="food.pick">先选一个</button>
           </div>
         </div>
 
         <div class="screen" data-screen="activity">
           <div class="card activity-card">
-            <p class="eyebrow">after dinner chaos</p>
-            <h2>What are we doing?</h2>
+            <p class="eyebrow" data-i18n="activity.eyebrow">吃完继续安排</p>
+            <h2 data-i18n="activity.title">我们去玩什么？</h2>
             <div class="option-grid activity-grid" id="activityGrid">
-              <button class="option-card activity-option" type="button" data-activity="Movie night" data-vibe="popcorn strategy">
+              <button class="option-card activity-option" type="button" data-activity-key="movie">
                 <span class="option-emoji activity-emoji">&#127916;</span>
-                <span>Movie</span>
+                <span data-i18n="activities.movie.label">电影</span>
               </button>
-              <button class="option-card activity-option" type="button" data-activity="Arcade games" data-vibe="competitive nonsense">
+              <button class="option-card activity-option" type="button" data-activity-key="arcade">
                 <span class="option-emoji activity-emoji">&#127918;</span>
-                <span>Arcade</span>
+                <span data-i18n="activities.arcade.label">电玩城</span>
               </button>
-              <button class="option-card activity-option" type="button" data-activity="Bowling" data-vibe="very serious shoes">
+              <button class="option-card activity-option" type="button" data-activity-key="bowling">
                 <span class="option-emoji activity-emoji">&#127923;</span>
-                <span>Bowling</span>
+                <span data-i18n="activities.bowling.label">保龄球</span>
               </button>
-              <button class="option-card activity-option" type="button" data-activity="Karaoke" data-vibe="main character vocals">
+              <button class="option-card activity-option" type="button" data-activity-key="karaoke">
                 <span class="option-emoji activity-emoji">&#127908;</span>
-                <span>Karaoke</span>
+                <span data-i18n="activities.karaoke.label">K歌</span>
               </button>
-              <button class="option-card activity-option" type="button" data-activity="Night walk" data-vibe="cute wandering">
+              <button class="option-card activity-option" type="button" data-activity-key="walk">
                 <span class="option-emoji activity-emoji">&#127769;</span>
-                <span>Walk</span>
+                <span data-i18n="activities.walk.label">散步</span>
               </button>
-              <button class="option-card activity-option" type="button" data-activity="Photo booth" data-vibe="evidence collection">
+              <button class="option-card activity-option" type="button" data-activity-key="photos">
                 <span class="option-emoji activity-emoji">&#128248;</span>
-                <span>Photos</span>
+                <span data-i18n="activities.photos.label">拍照</span>
               </button>
             </div>
-            <button class="btn primary wide" id="pickActivity" type="button" disabled>Pick one</button>
+            <button class="btn primary wide" id="pickActivity" type="button" disabled data-i18n="activity.pick">先选一个</button>
           </div>
         </div>
 
@@ -128,44 +132,44 @@
             <img class="sticker celebration floaty" src="assets/cloud-sticker.svg" alt="">
           </div>
           <div class="card final-card">
-            <p class="eyebrow">date secured</p>
-            <h2>I got you.</h2>
-            <p class="subtitle">Be ready for it. I'm coming to get you.</p>
+            <p class="eyebrow" data-i18n="final.eyebrow">约会已锁定</p>
+            <h2 data-i18n="final.title">安排好了。</h2>
+            <p class="subtitle" data-i18n="final.subtitle">准备一下，我要来接你了。</p>
             <dl class="summary">
               <div>
-                <dt>Date</dt>
+                <dt data-i18n="summary.date">日期</dt>
                 <dd id="summaryDate">&mdash;</dd>
               </div>
               <div>
-                <dt>Time</dt>
+                <dt data-i18n="summary.time">时间</dt>
                 <dd id="summaryTime">&mdash;</dd>
               </div>
               <div>
-                <dt>Food</dt>
+                <dt data-i18n="summary.food">吃什么</dt>
                 <dd id="summaryFood">&mdash;</dd>
               </div>
               <div>
-                <dt>Activity</dt>
+                <dt data-i18n="summary.activity">玩什么</dt>
                 <dd id="summaryActivity">&mdash;</dd>
               </div>
             </dl>
             <div class="final-actions">
-              <button class="icon-btn" id="restartButton" type="button" aria-label="Start over">
+              <button class="icon-btn" id="restartButton" type="button" aria-label="重新开始" data-i18n-aria="common.restart">
                 <span aria-hidden="true">&#8634;</span>
               </button>
-              <button class="btn secondary" id="calendarButton" type="button">Add calendar</button>
-              <button class="btn primary" id="copyButton" type="button">Copy plan</button>
+              <button class="btn secondary" id="calendarButton" type="button" data-i18n="calendar.add">加到日历</button>
+              <button class="btn primary" id="copyButton" type="button" data-i18n="copy.action">复制计划</button>
             </div>
           </div>
         </div>
 
         <div class="calendar-prompt hidden" id="calendarPrompt" role="dialog" aria-modal="true" aria-labelledby="calendarPromptTitle">
           <div class="calendar-box">
-            <p class="eyebrow">official paperwork</p>
-            <h3 id="calendarPromptTitle">Set this in your calendar?</h3>
+            <p class="eyebrow" data-i18n="calendar.eyebrow">正式备案一下</p>
+            <h3 id="calendarPromptTitle" data-i18n="calendar.title">要把它加入日历吗？</h3>
             <div class="calendar-actions">
-              <button class="btn ghost compact" id="skipCalendar" type="button">Later</button>
-              <button class="btn primary compact" id="addCalendarPrompt" type="button">Set it</button>
+              <button class="btn ghost compact" id="skipCalendar" type="button" data-i18n="calendar.later">晚点</button>
+              <button class="btn primary compact" id="addCalendarPrompt" type="button" data-i18n="calendar.set">设置</button>
             </div>
           </div>
         </div>

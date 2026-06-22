@@ -33,6 +33,42 @@ input {
   font: inherit;
 }
 
+.language-switch {
+  position: absolute;
+  top: 46px;
+  right: 18px;
+  z-index: 7;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 8px 18px rgba(123, 42, 76, 0.13);
+  backdrop-filter: blur(8px);
+}
+
+.lang-btn {
+  min-width: 38px;
+  height: 28px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--pink-700);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 900;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.lang-btn.active {
+  color: #fff;
+  background: linear-gradient(180deg, #ff75a8, #e9337c);
+}
+
+.lang-btn:hover {
+  transform: translateY(-1px);
+}
+
 .shell {
   min-height: 100svh;
   display: grid;
@@ -230,6 +266,11 @@ input {
   text-transform: lowercase;
 }
 
+:lang(zh-CN) .eyebrow {
+  font-size: 0.82rem;
+  text-transform: none;
+}
+
 h1,
 h2 {
   margin: 0;
@@ -268,6 +309,7 @@ h2 {
   cursor: pointer;
   font-weight: 900;
   color: var(--ink);
+  white-space: nowrap;
   transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
 }
 
@@ -458,6 +500,7 @@ h2 {
   flex: 1;
   min-width: 0;
   padding-inline: 14px;
+  font-size: 0.86rem;
 }
 
 .icon-btn {
@@ -529,6 +572,10 @@ h2 {
 
   .screen {
     padding-inline: 16px;
+  }
+
+  .language-switch {
+    right: 14px;
   }
 
   .card {

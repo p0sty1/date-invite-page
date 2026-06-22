@@ -5,6 +5,7 @@ A playful mobile-first date invitation webpage inspired by a pink hearts meme-st
 ## What It Does
 
 - English date invitation flow
+- Chinese by default with an English language toggle
 - Escaping `No` button
 - Date and time picker
 - Food picker
