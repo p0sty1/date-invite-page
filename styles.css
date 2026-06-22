@@ -266,6 +266,11 @@ input {
   text-transform: lowercase;
 }
 
+.eyebrow:empty,
+.subtitle:empty {
+  display: none;
+}
+
 :lang(zh-CN) .eyebrow {
   font-size: 0.82rem;
   text-transform: none;
